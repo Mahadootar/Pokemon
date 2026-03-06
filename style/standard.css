@@ -1,0 +1,54 @@
+:root{
+    --bg_darkblue_dark: #06171e;
+    --bg_darkblue_light: #09212A;
+    --bg_blue_dark: #0D3240;
+    --bg_blue_light: #124658;
+    --globalwhite: rgb(255, 255, 255);
+    --globalblurywhite: rgba(255, 255, 255, 0.3);
+    --globalgreen: rgb(37, 118, 29);
+    --globallightgray: rgb(233, 228, 228);
+    --globaldarkgray: rgb(62, 62, 62);
+  
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    background-color: var(--bg_darkblue_dark);
+}
+
+header{
+    background-color: var(--bg_darkblue_light); 
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+}
+
+main {
+    min-height: calc(100vh - 181px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px;
+    width: 100%;
+    max-width: 1440px;
+}
+
+footer{
+    background-color: var(--bg_darkblue_light); 
+    height: 130px;
+}

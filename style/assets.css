@@ -1,0 +1,12 @@
+.logo_con{
+    
+}
+
+.restaurent-logo{
+    width: 120px;
+}
+
+.header_con{
+    display: flex;
+    justify-content: space-between;
+}
