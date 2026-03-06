@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "palanquin";
+    src: url("../assets/fonts/Palanquin/Palanquin-Regular.ttf") format("truetype");
+   font-weight: 400;
+}
+
+@font-face {
+    font-family: "palanquin";
+    src: url("../assets/fonts/Palanquin/Palanquin-Medium.ttf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "palanquin";
+    src: url("../assets/fonts/Palanquin/Palanquin-Bold.ttf") format("truetype");
+    font-weight: 700;
+}

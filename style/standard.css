@@ -24,6 +24,7 @@ body{
     padding: 0px;
     overflow-x: hidden;
     background-color: var(--bg_darkblue_dark);
+    color: white;
 }
 
 header{
@@ -39,6 +40,11 @@ nav{
     align-items: center;
 }
 
+a{
+    color: red;
+    text-decoration: none;
+}
+
 main {
     min-height: calc(100vh - 181px);
     display: flex;
@@ -49,7 +55,41 @@ main {
     max-width: 1440px;
 }
 
+.impressum{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+dialog{
+    width: 280px;
+    height: 350px;
+    margin: auto;
+   background-color: var(--bg_blue_light);
+}
+
+dialog nav, dialog button{
+    background-color: #124658;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.footer_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    
+}
+
 footer{
     background-color: var(--bg_darkblue_light); 
     height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

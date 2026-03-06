@@ -62,12 +62,45 @@
       <section></section>
     </main>
     <footer>
-      <div>
+      <div class="footer_div">
         <p>Made by: Mahad Yussuf Nur</p>
-        <p>@ 2026 Pokedex</p>
-        <p><a href="./datenschutz.html">Datenschutz</a></p>
+        <p>@ 2026 Pokedex <a href="./impressum.html">impressum</a></p>
+        <p>
+          <a href="./datenschutz.html">Datenschutz</a>
+        </p>
       </div>
     </footer>
-    <dialog></dialog>
+    <button onclick="openDialog()">Open Dialog</button>
+    <dialog
+      id="dialog_id"
+      aria-labelledby="dialog-title"
+      aria-describedby="dialogDescription"
+      onclick="openDialog()"
+    >
+      <div id="dialog_content">
+        <header class="pokemon_img_header">
+          <h4 class="pokemon-title" id="dialog-title"></h4>
+        </header>
+        <section id="dialogDescription">
+          <div>
+            <img src="" alt="" />
+          </div>
+          <div></div>
+        </section>
+        <section>
+          <nav>
+            <button>Main</button>
+            <button>Stats</button>
+            <button>Evo Chain</button>
+          </nav>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </section>
+      </div>
+    </dialog>
   </body>
+  <script src="/script.js"></script>
 </html>
