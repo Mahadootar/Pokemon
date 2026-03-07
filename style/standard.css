@@ -88,8 +88,11 @@ dialog nav, dialog button{
 
 footer{
     background-color: var(--bg_darkblue_light); 
-    height: 130px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    bottom: 0;
+    
 }

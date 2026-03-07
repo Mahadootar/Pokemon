@@ -8,3 +8,81 @@
     padding: 32px 24px;
     max-width: 1440px;
 }
+
+.grass{
+    background-color: green;
+}
+
+.water{
+    background-color: rgb(31, 31, 240);
+}
+
+.fire{
+    background-color: rgb(243, 55, 55);
+}
+
+.electric {
+    background-color: #F8D030;
+}
+
+.bug {
+    background-color: #A8B820;
+}
+
+.normal {
+    background-color: #A8A878;
+}
+
+.poison {
+    background-color: #A040A0;
+}
+
+.ground {
+    background-color: #E0C068;
+}
+
+.fairy {
+    background-color: #EE99AC;
+}
+
+.fighting {
+    background-color: #C03028;
+}
+
+.psychic {
+    background-color: #F85888;
+}
+
+.rock {
+    background-color: #B8A038;
+}
+
+.ghost {
+    background-color: #705898;
+}
+
+.ice {
+    background-color: #98D8D8;
+}
+
+.dragon {
+    background-color: #7038F8;
+}
+
+.dark {
+    background-color: #705848;
+}
+
+.steel {
+    background-color: #B8B8D0;
+}
+
+.flying {
+    background-color: #A890F0;
+}
+
+.pokemon_card{
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
