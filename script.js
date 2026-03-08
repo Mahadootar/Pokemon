@@ -9,7 +9,7 @@ async function init() {
 
  async function fetchData() {
    try {
-     const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0";
+     const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0";
 
     let response = await fetch(BASE_URL);
     let data = await response.json();

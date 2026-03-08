@@ -85,4 +85,13 @@
     width: 150px;
     height: 150px;
     object-fit: contain;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--bg_darkblue_light);
+}
+
+.pokemon_img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
