@@ -10,15 +10,15 @@
 }
 
 .grass{
-    background-color: green;
+    background-color: #4dda4d;
 }
 
 .water{
-    background-color: rgb(31, 31, 240);
+    background-color: rgb(73, 73, 255);
 }
 
 .fire{
-    background-color: rgb(243, 55, 55);
+    background-color: rgb(165, 62, 62);
 }
 
 .electric {
@@ -94,4 +94,10 @@
     width: 100px;
     height: 100px;
     object-fit: contain;
+}
+
+.pokemon_info{
+    display: flex;
+    justify-content: center;
+    
 }

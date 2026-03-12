@@ -9,7 +9,7 @@ async function init() {
 
  async function fetchData() {
    try {
-     const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0";
+     const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 
     let response = await fetch(BASE_URL);
     let data = await response.json();
@@ -34,13 +34,24 @@ async function renderPokemons(){
         let response = await fetch(pokemon.url);
         let data = await response.json();
         let type = data.types[0].type.name;
-        console.log(type);
+        let icons = getTypeOfIcon(data.types);
         
         let colorClass = getColor(type);
-        pokemonContainer.innerHTML += pokemonTemplate(pokemon, colorClass);
+        pokemonContainer.innerHTML += pokemonTemplate(pokemon, colorClass, icons);
     }
     
 }
+
+function getTypeOfIcon(types){
+   let icons = "";
+
+   for (let index = 0; index < types.length; index++) {
+    const type = types[index].type.name;
+    icons += typeOfIcons[type] ;
+   }
+   return icons;
+}
+
 
 function getColor(type){
     switch (type) {
@@ -59,12 +70,12 @@ function getColor(type){
     }
 }
 
-
-
-
-
-
 function openDialog(){
     dialogRef.showModal();
+
+}
+
+function updateDialogContent(pokemon){
+    document.getElementById("dialog_id").innerHTML = ;
 
 }
