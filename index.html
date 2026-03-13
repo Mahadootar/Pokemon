@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="init()">
-    <header>
+    <header class="aot_header">
       <div class="header_con">
         <div class="pokebox-logo">
           <svg
@@ -81,16 +81,18 @@
         onclick="logDownBubblingProtection(event)"
         id="dialog_content"
       >
-        <header class="pokemon_img_header">
-          <h4 class="pokemon-title" id="dialog-title"></h4>
-        </header>
+        <div class="dialog-Header_container">
+          <header class="pokemon_img_header">
+            <h4 class="pokemon-title" id="dialog-title"></h4>
+          </header>
+        </div>
         <section id="dialogDescription">
           <div class="current_img_container">
             <img class="currentImage" id="dialog_img" />
           </div>
-          <div></div>
+          <div id="type_pokemon_dialog"></div>
         </section>
-        <section>
+        <section class="poke_info_section">
           <nav>
             <button>Main</button>
             <button>Stats</button>

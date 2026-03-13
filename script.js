@@ -3,6 +3,8 @@ const pokemonContainer = document.getElementById("pokemonContent");
 let pokemonData = [];
 let loadedPokemonData = [];
 
+
+
 async function init() {
    await fetchData();
    renderPokemons();
@@ -27,17 +29,36 @@ async function init() {
 async function renderPokemons(){
     let pokemonContainer = document.getElementById('pokemonContent');
     pokemonContainer.innerHTML = '';
+    loadedPokemonData = [];
 
     for (let index = 0; index < pokemonData.length; index++) {
         let pokemon = pokemonData[index];
-        let response = await fetch(pokemon.url);
-        let data = await response.json();
-        let type = data.types[0].type.name;
-        let icons = getTypeOfIcon(data.types);
-        loadedPokemonData.push(data);
-        let colorClass = getColor(type);
-        pokemonContainer.innerHTML += pokemonTemplate(pokemon, colorClass, icons, index);
+        let data = await loadPokemonDetails(pokemon);
+
+        pokemonContainer.innerHTML += createPokemonCard(data, index);
     }  
+}
+
+async function loadPokemonDetails(pokemon){
+    let response = await fetch(pokemon.url);
+        let data = await response.json();
+        loadedPokemonData.push(data);
+
+        return data;
+
+}
+
+function createPokemonCard(pokemon, index){
+    let id = pokemon.id;
+    let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
+
+    let type = pokemon.types[0].type.name;
+        let icons = getTypeOfIcon(pokemon.types);
+        let colorClass = getColor(type);
+
+    return pokemonTemplate(pokemon, imgURL, colorClass, icons, index);
+
+
 }
 
 function getTypeOfIcon(types){
@@ -58,11 +79,12 @@ function openDialog(pokemon){
 }
 
 function updateDialogContent(pokemon){
+    let icons = getTypeOfIcon(pokemon.types);
+    let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`;
     document.getElementById("dialog-title").innerHTML = pokemon.name; 
-    document.getElementById("dialog_img").src = pokemon.sprites.front_default;
+    document.getElementById("dialog_img").src = imgURL;
     document.getElementById("dialog_img").alt = pokemon.name;
-
-
+    document.getElementById("type_pokemon_dialog").innerHTML = `<div class="pokemon_type">${icons}</div>`;
 
 }
 

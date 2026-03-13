@@ -27,7 +27,7 @@ body{
     color: white;
 }
 
-header{
+.aot_header{
     background-color: var(--bg_darkblue_light); 
     height: 130px;
     display: flex;
@@ -67,14 +67,15 @@ dialog{
     width: 280px;
     height: 350px;
     margin: auto;
+    padding: 0px;
    background-color: var(--bg_blue_light);
+   border-radius: 20px;
 }
 
 dialog nav, dialog button{
-    background-color: #124658;
     display: flex;
-    justify-content: space-between;
-    gap: 5px;
+    justify-content: center;
+    width: 100%;
 }
 
 .footer_div {
@@ -95,4 +96,9 @@ footer{
     position: sticky;
     bottom: 0;
     
+}
+
+#dialogDescription{
+    width: 100%;
+
 }
