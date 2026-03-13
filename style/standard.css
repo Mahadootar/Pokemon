@@ -64,8 +64,8 @@ main {
 }
 
 dialog{
-    width: 280px;
-    height: 350px;
+    width: 300px;
+    height: 400px;
     margin: auto;
     padding: 0px;
    background-color: var(--bg_blue_light);
@@ -101,4 +101,8 @@ footer{
 #dialogDescription{
     width: 100%;
 
+}
+
+.d_none{
+    display: none;
 }

@@ -17,7 +17,6 @@ async function init() {
     let response = await fetch(BASE_URL);
     let data = await response.json();
     pokemonData = data.results;
-    console.log(pokemonData);
     
    } catch (error) {
     console.log('Failed To Fetch Pokemon :(', error);
@@ -79,17 +78,58 @@ function openDialog(pokemon){
 }
 
 function updateDialogContent(pokemon){
+    updateDialogHeader(pokemon);
+    rendertMainTab(pokemon);
+    showTabsInfo('main');
+    
+    
+
+
+}
+
+function updateDialogHeader(pokemon){
+    
     let icons = getTypeOfIcon(pokemon.types);
     let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`;
-    document.getElementById("dialog-title").innerHTML = pokemon.name; 
+    document.getElementById("dialog-title").innerHTML = `#${pokemon.id} ${pokemon.name}`;
     document.getElementById("dialog_img").src = imgURL;
     document.getElementById("dialog_img").alt = pokemon.name;
     document.getElementById("type_pokemon_dialog").innerHTML = `<div class="pokemon_type">${icons}</div>`;
 
 }
 
+function getAbilities(abilities){
+
+    let abilityNames = "";
+
+    for (let i = 0; i < abilities.length; i++) {
+
+        abilityNames += abilities[i].ability.name;
+
+        if(i < abilities.length - 1){
+            abilityNames += ", ";
+        }
+    }
+
+    return abilityNames;
+}
+
+function rendertMainTab(pokemon){
+    let height = pokemon.height / 10;
+    let weight = pokemon.weight / 10;
+    let abilities = getAbilities(pokemon.abilities);
+    document.getElementById("tab_main").innerHTML = renderMainTamplate(height, weight, pokemon.base_experience, abilities);
+}
+
+function showTabsInfo(tabName){
+    document.getElementById('tab_main').classList.add('d_none');
+    document.getElementById('tab_stats').classList.add('d_none');
+    document.getElementById('tab_evo').classList.add('d_none');
+
+    document.getElementById('tab_' + tabName).classList.remove('d_none');
+}
+
 function logDownBubblingProtection(event){
-    console.log("logDown");
     event.stopPropagation();
 }
 

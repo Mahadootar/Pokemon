@@ -94,14 +94,14 @@
         </section>
         <section class="poke_info_section">
           <nav>
-            <button>Main</button>
-            <button>Stats</button>
-            <button>Evo Chain</button>
+            <button onclick="showTabsInfo('main')">main</button>
+            <button onclick="showTabsInfo('stats')">stats</button>
+            <button onclick="showTabsInfo('evo')">evo Chain</button>
           </nav>
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
+          <div id="tab_content">
+            <div id="tab_main"></div>
+            <div id="tab_stats" class="d_none"></div>
+            <div id="tab_evo" class="d_none"></div>
           </div>
         </section>
       </div>

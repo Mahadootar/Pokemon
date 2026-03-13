@@ -119,3 +119,21 @@
 .poke_info_section{
     width: 100%;
 }
+
+#tab_main{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 5px;
+}
+
+.main_info{
+    display: flex;
+    gap: 60px;
+
+}
+
+.base_exp_main_info{
+    display: flex;
+
+}
