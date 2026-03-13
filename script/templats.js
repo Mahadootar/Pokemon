@@ -1,8 +1,8 @@
-function pokemonTemplate(pokemon, type, icons){
+function pokemonTemplate(pokemon, type, icons, index){
     let id = pokemon.url.split('/')[6];
     let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
 
-    return `<div class="pokemon_card">
+    return `<div class="pokemon_card"  onclick="openDialog(loadedPokemonData[${index}])">
     <div>
     <h3>#${id} ${pokemon.name}</h3>
     </div>

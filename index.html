@@ -75,15 +75,18 @@
       id="dialog_id"
       aria-labelledby="dialog-title"
       aria-describedby="dialogDescription"
-      onclick="openDialog()"
     >
-      <div id="dialog_content">
+      <div
+        class="dialog_content"
+        onclick="logDownBubblingProtection(event)"
+        id="dialog_content"
+      >
         <header class="pokemon_img_header">
           <h4 class="pokemon-title" id="dialog-title"></h4>
         </header>
         <section id="dialogDescription">
-          <div>
-            <img src="" alt="" />
+          <div class="current_img_container">
+            <img class="currentImage" id="dialog_img" />
           </div>
           <div></div>
         </section>

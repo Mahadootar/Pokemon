@@ -1,6 +1,7 @@
 const dialogRef = document.getElementById("dialog_id");
 const pokemonContainer = document.getElementById("pokemonContent");
 let pokemonData = [];
+let loadedPokemonData = [];
 
 async function init() {
    await fetchData();
@@ -20,9 +21,7 @@ async function init() {
     console.log('Failed To Fetch Pokemon :(', error);
     
     pokemonContainer.innerHTML = `<li>Failed To Load:(</li>`
-    
-   }
-   
+   } 
 }
 
 async function renderPokemons(){
@@ -35,11 +34,10 @@ async function renderPokemons(){
         let data = await response.json();
         let type = data.types[0].type.name;
         let icons = getTypeOfIcon(data.types);
-        
+        loadedPokemonData.push(data);
         let colorClass = getColor(type);
-        pokemonContainer.innerHTML += pokemonTemplate(pokemon, colorClass, icons);
-    }
-    
+        pokemonContainer.innerHTML += pokemonTemplate(pokemon, colorClass, icons, index);
+    }  
 }
 
 function getTypeOfIcon(types){
@@ -52,6 +50,26 @@ function getTypeOfIcon(types){
    return icons;
 }
 
+function openDialog(pokemon){
+    currentPokemonIndex = loadedPokemonData.indexOf(pokemon);
+    updateDialogContent(pokemon);
+    dialogRef.showModal();
+
+}
+
+function updateDialogContent(pokemon){
+    document.getElementById("dialog-title").innerHTML = pokemon.name; 
+    document.getElementById("dialog_img").src = pokemon.sprites.front_default;
+    document.getElementById("dialog_img").alt = pokemon.name;
+
+
+
+}
+
+function logDownBubblingProtection(event){
+    console.log("logDown");
+    event.stopPropagation();
+}
 
 function getColor(type){
     switch (type) {
@@ -68,14 +86,4 @@ function getColor(type){
         default:
             return "normal";
     }
-}
-
-function openDialog(){
-    dialogRef.showModal();
-
-}
-
-function updateDialogContent(pokemon){
-    document.getElementById("dialog_id").innerHTML = ;
-
 }
