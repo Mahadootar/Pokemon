@@ -1,15 +1,15 @@
-const dialogRef = document.getElementById("dialog_id");
-const pokemonContainer = document.getElementById("pokemonContent");
-let pokemonData = [];
-let loadedPokemonData = [];
+const dialogRef = document.getElementById("dialog_id"); /* Here, an HTML element with the ID dialog_id is searched for and stored in the variable. */
+const pokemonContainer = document.getElementById("pokemonContent"); /*This is where the container element is stored, in which the Pokémon cards are displayed.zeigt werden.*/
+let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
+let loadedPokemonData = []; /*This array will later store the complete detailed data of the Pokémon. */
 
-
-
+/*Diese Funktion startet den gesamten Prozess. fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
    await fetchData();
    renderPokemons();
 }
 
+/* This function loads Pokémon data from an API and saves the results.*/
  async function fetchData() {
    try {
      const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
