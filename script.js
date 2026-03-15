@@ -1,18 +1,18 @@
 const dialogRef = document.getElementById("dialog_id"); /* Here, an HTML element with the ID dialog_id is searched for and stored in the variable. */
 const pokemonContainer = document.getElementById("pokemonContent"); /*This is where the container element is stored, in which the Pokémon cards are displayed.zeigt werden.*/
 let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
-let loadedPokemonData = []; /*This array will later store the complete detailed data of the Pokémon. */
+let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
 
 /*Diese Funktion startet den gesamten Prozess. fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
-   await fetchData();
+   await fetchData(20,0);
    renderPokemons();
 }
 
 /* This function loads Pokémon data from an API and saves the results.*/
- async function fetchData() {
+ async function fetchData(limit = 20, offset = 0) {
    try {
-     const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+     const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
 
     let response = await fetch(BASE_URL);
     let data = await response.json();
@@ -41,7 +41,7 @@ async function renderPokemons(){
 async function loadPokemonDetails(pokemon){
     let response = await fetch(pokemon.url);
         let data = await response.json();
-        loadedPokemonData.push(data);
+        loadedPokemonData[data.id] = data;
 
         return data;
 
@@ -70,15 +70,16 @@ function getTypeOfIcon(types){
    return icons;
 }
 
-function openDialog(pokemon){
-    currentPokemonIndex = loadedPokemonData.indexOf(pokemon);
-    updateDialogContent(pokemon);
+function openDialog(pokemonId){
+    let selectedPokemon = loadedPokemonData[pokemonId];
+    currentPokemonId = pokemonId;
+    updateDialogContent(selectedPokemon);
     dialogRef.showModal();
 
 }
 
 function updateDialogContent(pokemon){
-    updateDialogHeader(pokemon);
+    updateDialogHeader(selectedPokemon);
     rendertMainTab(pokemon);
     showTabsInfo('main');
     
@@ -149,3 +150,4 @@ function getColor(type){
             return "normal";
     }
 }
+
