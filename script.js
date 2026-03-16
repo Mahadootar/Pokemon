@@ -1,7 +1,9 @@
-const dialogRef = document.getElementById("dialog_id"); /* Here, an HTML element with the ID dialog_id is searched for and stored in the variable. */
-const pokemonContainer = document.getElementById("pokemonContent"); /*This is where the container element is stored, in which the Pokémon cards are displayed.zeigt werden.*/
+const dialogRef = document.getElementById("dialog_id"); 
+const pokemonContainer = document.getElementById("pokemonContent"); 
 let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
+let pokemonDetailsCatch = {} /*This Object is used to store the Pokémon details that have been loaded. */
+let evelutionDataCatch = {} /*This Object is used to store the evolution data that has been loaded. */
 
 /*Diese Funktion startet den gesamten Prozess. fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
@@ -16,7 +18,7 @@ async function init() {
 
     let response = await fetch(BASE_URL);
     let data = await response.json();
-    pokemonData = data.results;
+    pokemonData.push(...data.results);
     
    } catch (error) {
     console.log('Failed To Fetch Pokemon :(', error);
@@ -28,12 +30,10 @@ async function init() {
 async function renderPokemons(){
     let pokemonContainer = document.getElementById('pokemonContent');
     pokemonContainer.innerHTML = '';
-    loadedPokemonData = [];
 
     for (let index = 0; index < pokemonData.length; index++) {
         let pokemon = pokemonData[index];
         let data = await loadPokemonDetails(pokemon);
-
         pokemonContainer.innerHTML += createPokemonCard(data, index);
     }  
 }
@@ -72,19 +72,16 @@ function getTypeOfIcon(types){
 
 function openDialog(pokemonId){
     let selectedPokemon = loadedPokemonData[pokemonId];
-    currentPokemonId = pokemonId;
+    selectedPokemonId = pokemonId;
     updateDialogContent(selectedPokemon);
     dialogRef.showModal();
 
 }
 
 function updateDialogContent(pokemon){
-    updateDialogHeader(selectedPokemon);
+    updateDialogHeader(pokemon);
     rendertMainTab(pokemon);
     showTabsInfo('main');
-    
-    
-
 
 }
 
