@@ -53,6 +53,33 @@ function renderMainTamplate(height, weight, base_Exp, abilities){
 function renderStatsTemplate(hp, attack, defense, specialAttack, specialDefense,speed){
     return `
     <div>
-    <p>HP :${hp}</p>
+    <span>HP
+      <p>:${hp}</p>
+    </span>
+    <span>
+       <p>Attak :${attack}</p>
+    </span>
+    <span>
+      <p>Defense :${defense}</p>
+    </span>
+    <span>
+       <p>Sp-Attack :${specialAttack}</p>
+    </span>
+    <span>
+       <p>Sp-Defense :${specialDefense}</p>
+    </span>
+    <span>
+       <p>Speed :${speed}</p>
+    </span>
     </div>`
+}
+
+function renderEvoChain(evoLutionsNames){
+    let html = "";
+
+    for (let index = 0; index < evoLutionsNames.length; index++) {
+        html += `<img`
+        
+    }
+
 }

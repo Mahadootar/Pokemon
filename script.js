@@ -57,8 +57,6 @@ function createPokemonCard(pokemon, index){
         let colorClass = getColor(type);
 
     return pokemonTemplate(pokemon, imgURL, colorClass, icons, index);
-
-
 }
 
 function getTypeOfIcon(types){
@@ -84,6 +82,7 @@ function updateDialogContent(pokemon){
     updateDialogHeader(pokemon);
     renderMainTab(currentPokemon);
     renderStatsTab(currentPokemon);
+    renderEvoTab(currentPokemon)
     showTabsInfo('main');
 
 }
@@ -135,7 +134,44 @@ function renderStatsTab(pokemon){
     console.log(pokemon.stats);
 }
 
+async function loadEvoChain(pokemon){
+    let speciesResponse = await fetch(pokemon.species.url);
+    let speciesPokemonData = await speciesResponse.json();
 
+    let evolutionsChainResponse = await fetch(speciesPokemonData.evolution_chain.url);
+    let evolutionsData = await evolutionsChainResponse.json();
+
+    return evolutionsData.chain;
+}
+
+function getTheIdOfUrl(){
+    let parts = url.split("/");
+}
+
+function getEvoNames(chain){
+     let id = pokemon.id;
+    let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
+    let evolutionNames = [];
+    evolutionNames.push(chain.species.name);
+
+    if (chain.evolves_to.length > 0) {
+        evolutionNames.push(chain.evolves_to[0].species.name);
+    }
+
+    if (chain.evolves_to.length > 0 && chain.evolves_to[0].evolves_to.length > 0) {
+         evolutionNames.push(chain.evolves_to[0].evolves_to[0].species.name);
+
+    }
+    return evolutionNames;
+}
+
+ async function renderEvoTab(pokemon){
+    let chain = await loadEvoChain(pokemon)
+    let evolutionNames = await getEvoNames(chain);
+    document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutionNames);
+    
+    
+}
 
 function showTabsInfo(tabName){
     console.log("showTabsInfo läuft:", tabName);
