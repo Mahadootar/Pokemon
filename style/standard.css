@@ -104,5 +104,5 @@ footer{
 }
 
 .d_none{
-    display: none;
+    display: none!important;
 }

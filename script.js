@@ -4,8 +4,9 @@ let pokemonData = [];  /* The array first stores the Pokémon list from the API.
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
 let pokemonDetailsCatch = {} /*This Object is used to store the Pokémon details that have been loaded. */
 let evelutionDataCatch = {} /*This Object is used to store the evolution data that has been loaded. */
+let currentPokemon;
 
-/*Diese Funktion startet den gesamten Prozess. fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
+/*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
    await fetchData(20,0);
    renderPokemons();
@@ -79,8 +80,10 @@ function openDialog(pokemonId){
 }
 
 function updateDialogContent(pokemon){
+    currentPokemon = pokemon;
     updateDialogHeader(pokemon);
-    rendertMainTab(pokemon);
+    renderMainTab(currentPokemon);
+    renderStatsTab(currentPokemon);
     showTabsInfo('main');
 
 }
@@ -112,14 +115,30 @@ function getAbilities(abilities){
     return abilityNames;
 }
 
-function rendertMainTab(pokemon){
+function renderMainTab(pokemon){
     let height = pokemon.height / 10;
     let weight = pokemon.weight / 10;
     let abilities = getAbilities(pokemon.abilities);
     document.getElementById("tab_main").innerHTML = renderMainTamplate(height, weight, pokemon.base_experience, abilities);
+    console.log(pokemon.abilities);
+    
 }
 
+function renderStatsTab(pokemon){
+    let hp = pokemon.stats[0].base_stat;
+    let attack = pokemon.stats[1].base_stat;
+    let defense = pokemon.stats[2].base_stat;
+    let specialAttack = pokemon.stats[3].base_stat;
+    let specialDefense = pokemon.stats[4].base_stat;
+    let speed = pokemon.stats[5].base_stat;
+    document.getElementById("tab_stats").innerHTML = renderStatsTemplate(hp, attack, defense, specialAttack, specialDefense,speed);
+    console.log(pokemon.stats);
+}
+
+
+
 function showTabsInfo(tabName){
+    console.log("showTabsInfo läuft:", tabName);
     document.getElementById('tab_main').classList.add('d_none');
     document.getElementById('tab_stats').classList.add('d_none');
     document.getElementById('tab_evo').classList.add('d_none');

@@ -49,3 +49,10 @@ function renderMainTamplate(height, weight, base_Exp, abilities){
          
     `;
 }
+
+function renderStatsTemplate(hp, attack, defense, specialAttack, specialDefense,speed){
+    return `
+    <div>
+    <p>HP :${hp}</p>
+    </div>`
+}

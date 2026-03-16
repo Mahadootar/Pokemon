@@ -95,8 +95,22 @@
         </section>
         <section class="poke_info_section">
           <nav>
-            <button onclick="showTabsInfo('main')">main</button>
-            <button onclick="showTabsInfo('stats')">stats</button>
+            <button
+              onclick="
+                showTabsInfo('main');
+                renderMainTab(currentPokemon);
+              "
+            >
+              main
+            </button>
+            <button
+              onclick="
+                showTabsInfo('stats');
+                renderStatsTab(currentPokemon);
+              "
+            >
+              stats
+            </button>
             <button onclick="showTabsInfo('evo')">evo Chain</button>
           </nav>
           <div id="tab_content">
