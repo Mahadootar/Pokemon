@@ -52,26 +52,28 @@ function renderMainTamplate(height, weight, base_Exp, abilities){
 
 function renderStatsTemplate(hp, attack, defense, specialAttack, specialDefense,speed){
     return `
-    <div>
-    <span>HP
-      <p>:${hp}</p>
-    </span>
-    <span>
-       <p>Attak :${attack}</p>
-    </span>
-    <span>
-      <p>Defense :${defense}</p>
-    </span>
-    <span>
-       <p>Sp-Attack :${specialAttack}</p>
-    </span>
-    <span>
-       <p>Sp-Defense :${specialDefense}</p>
-    </span>
-    <span>
-       <p>Speed :${speed}</p>
-    </span>
-    </div>`
+    <div class="stats_box">
+    ${renderSingleStat("HP", hp)}
+    ${renderSingleStat("Attack", attack)}
+    ${renderSingleStat("Defense", defense)}
+    ${renderSingleStat("Sp-Attack", specialAttack)}
+    ${renderSingleStat("Sp-Defense", specialDefense)}
+    ${renderSingleStat("Speed", speed)}
+    </div>
+    `;
+}
+
+function renderSingleStat(name, value){
+    let percent = (value / 255) * 100;
+    return `
+    <div class="stat_row">
+    <span class="stat_name">${name}</span>
+    <div class="progress_bar">
+    <div class="progress_fill" style="width: ${percent}%;">${value}</div>
+    </div>
+    </div>
+    `;
+    
 }
 
 function renderEvoChain(evolutions){
