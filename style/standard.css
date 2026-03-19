@@ -64,8 +64,8 @@ main {
 }
 
 dialog{
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 500px;
     margin: auto;
     padding: 0px;
    background-color: var(--bg_blue_light);

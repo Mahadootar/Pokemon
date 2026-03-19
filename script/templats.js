@@ -74,12 +74,16 @@ function renderStatsTemplate(hp, attack, defense, specialAttack, specialDefense,
     </div>`
 }
 
-function renderEvoChain(evoLutionsNames){
+function renderEvoChain(evolutions){
     let html = "";
 
-    for (let index = 0; index < evoLutionsNames.length; index++) {
-        html += `<img`
-        
+    for (let i = 0; i < evolutions.length; i++) {
+        html += `<div>
+        <img class="evo_img" src="${evolutions[i].img}" alt="${evolutions[i].name}">
+        <p><strong>${evolutions[i].name}</strong></p>
+        </div>
+        `; 
     }
+    return html;
 
 }

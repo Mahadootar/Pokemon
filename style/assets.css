@@ -147,3 +147,15 @@
     font-size: medium;
     margin-top: 10px;
 }
+
+.evo_img{
+    width: 100px;
+    height:  100px;
+    object-fit: contain;
+}
+
+#tab_evo{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

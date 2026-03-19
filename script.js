@@ -144,31 +144,38 @@ async function loadEvoChain(pokemon){
     return evolutionsData.chain;
 }
 
-function getTheIdOfUrl(){
+function getTheIdOfUrl(url){
     let parts = url.split("/");
+    
+    return parts[6];
 }
 
-function getEvoNames(chain){
-     let id = pokemon.id;
-    let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
-    let evolutionNames = [];
-    evolutionNames.push(chain.species.name);
+function createEvolutionData(species){
+    let id = getTheIdOfUrl(species.url)
+    let img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
+    return {name : species.name, img: img};
+     
+
+}
+
+function getEvoNamesAndImages(chain){
+    let evolutions = [createEvolutionData(chain.species)]
 
     if (chain.evolves_to.length > 0) {
-        evolutionNames.push(chain.evolves_to[0].species.name);
+        evolutions.push(createEvolutionData(chain.evolves_to[0].species));
     }
 
     if (chain.evolves_to.length > 0 && chain.evolves_to[0].evolves_to.length > 0) {
-         evolutionNames.push(chain.evolves_to[0].evolves_to[0].species.name);
+         evolutions.push(createEvolutionData(chain.evolves_to[0].evolves_to[0].species));
 
     }
-    return evolutionNames;
+    return evolutions;
 }
 
  async function renderEvoTab(pokemon){
     let chain = await loadEvoChain(pokemon)
-    let evolutionNames = await getEvoNames(chain);
-    document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutionNames);
+    let evolutions = getEvoNamesAndImages(chain);
+    document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutions);
     
     
 }

@@ -60,7 +60,7 @@
     </header>
     <main>
       <section id="pokemonContent"></section>
-      <button class="btn_load">load Pokemons</button>
+      <button onclick="" class="btn_load">load Pokemons</button>
     </main>
     <footer>
       <div class="footer_div">
@@ -111,7 +111,14 @@
             >
               stats
             </button>
-            <button onclick="showTabsInfo('evo')">evo Chain</button>
+            <button
+              onclick="
+                showTabsInfo('evo');
+                renderEvoTab(currentPokemon);
+              "
+            >
+              evo Chain
+            </button>
           </nav>
           <div id="tab_content">
             <div id="tab_main"></div>
