@@ -76,10 +76,11 @@
       id="dialog_id"
       aria-labelledby="dialog-title"
       aria-describedby="dialogDescription"
+      onclick="closeDialog()"
     >
       <div
         class="dialog_content"
-        onclick="logDownBubblingProtection(event)"
+        onclick="stopEventBubbling(event)"
         id="dialog_content"
       >
         <div class="dialog-Header_container">

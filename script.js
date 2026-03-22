@@ -189,8 +189,12 @@ function showTabsInfo(tabName){
     document.getElementById('tab_' + tabName).classList.remove('d_none');
 }
 
-function logDownBubblingProtection(event){
+function stopEventBubbling(event){
     event.stopPropagation();
+}
+
+function closeDialog(){
+    dialogRef.close();
 }
 
 function getColor(type){
