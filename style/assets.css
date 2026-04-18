@@ -123,7 +123,7 @@
 #tab_main{
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 50px;
     margin-left: 5px;
     color: whitesmoke;
 }
@@ -159,4 +159,14 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.next_pokemon{
+    font-size: medium;
+    cursor: pointer;
+    padding: 16px;
+    background-color: rgb(255 59 59);
+    border-radius: 50%;
+    width: 0px;
+    
 }

@@ -106,3 +106,10 @@ footer{
 .d_none{
     display: none!important;
 }
+
+.next_previos_container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}

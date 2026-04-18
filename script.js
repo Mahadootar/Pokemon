@@ -5,6 +5,7 @@ let loadedPokemonData = {} /*This Object will later store the complete detailed 
 let pokemonDetailsCatch = {} /*This Object is used to store the Pokémon details that have been loaded. */
 let evelutionDataCatch = {} /*This Object is used to store the evolution data that has been loaded. */
 let currentPokemon;
+let currentIndex = 0;
 
 /*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
@@ -73,6 +74,7 @@ function openDialog(pokemonId){
     let selectedPokemon = loadedPokemonData[pokemonId];
     selectedPokemonId = pokemonId;
     updateDialogContent(selectedPokemon);
+    currentIndex = pokemonId;
     dialogRef.showModal();
 
 }
@@ -195,6 +197,25 @@ function stopEventBubbling(event){
 
 function closeDialog(){
     dialogRef.close();
+}
+
+function nextPokemon(pokemon){
+    if (currentIndex < pokemonData.length -1 ) {
+        currentIndex++
+    }else{
+        currentIndex = 0;
+    }
+    updateDialogContent(pokemon);
+}
+
+function previousPokemon(pokemon){
+    if (currentIndex > 0) {
+        currentIndex--;
+    }else{
+        currentIndex = pokemonData.length -1
+    }
+    updateDialogContent(pokemon);
+
 }
 
 function getColor(type){
