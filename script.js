@@ -2,8 +2,7 @@ const dialogRef = document.getElementById("dialog_id");
 const pokemonContainer = document.getElementById("pokemonContent"); 
 let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
-let pokemonDetailsCatch = {} /*This Object is used to store the Pokémon details that have been loaded. */
-let evelutionDataCatch = {} /*This Object is used to store the evolution data that has been loaded. */
+let evolutionDataCache = {} /*This Object is used to store the evolution data that has been loaded. */
 let currentPokemon;
 let currentIndex = 0;
 
@@ -72,9 +71,16 @@ function getTypeOfIcon(types){
 
 function openDialog(pokemonId){
     let selectedPokemon = loadedPokemonData[pokemonId];
-    selectedPokemonId = pokemonId;
+
+    for (let i = 0; i < pokemonData.length; i++) {
+        let idOfPokemonInList = getTheIdOfUrl(pokemonData[i].url);
+        
+        if (idOfPokemonInList === pokemonId) {
+            currentIndex = i;
+            break;
+        }
+    }
     updateDialogContent(selectedPokemon);
-    currentIndex = pokemonId;
     dialogRef.showModal();
 
 }
