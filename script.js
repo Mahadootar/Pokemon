@@ -190,8 +190,6 @@ function getEvoNamesAndImages(chain){
     let chain = await loadEvoChain(pokemon)
     let evolutions = getEvoNamesAndImages(chain);
     document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutions);
-    
-    
 }
 
 function stopEventBubbling(event){
