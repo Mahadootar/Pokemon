@@ -85,12 +85,12 @@ function openDialog(pokemonId){
 
 }
 
-function updateDialogContent(pokemon){
+async function updateDialogContent(pokemon){
     currentPokemon = pokemon;
     updateDialogHeader(pokemon);
     renderMainTab(currentPokemon);
     renderStatsTab(currentPokemon);
-    renderEvoTab(currentPokemon)
+    await renderEvoTab(currentPokemon)
     showTabsInfo('main');
 
 }
@@ -155,7 +155,7 @@ async function loadEvoChain(pokemon){
 function getTheIdOfUrl(url){
     let parts = url.split("/");
     
-    return parts[6];
+    return Number(parts[6]);
 }
 
 function createEvolutionData(species){
