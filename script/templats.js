@@ -12,7 +12,7 @@ function pokemonTemplate(pokemon, imgURL, colorClass, icons, index){
     </div>`
 } 
 
-function renderMainTamplate(height, weight, base_Exp, abilities){
+function renderMainTemplate(height, weight, base_Exp, abilities){
    return `
        <div class="main_info"> 
        <div >

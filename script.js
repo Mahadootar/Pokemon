@@ -85,6 +85,12 @@ function openDialog(pokemonId){
 
 }
 
+function getTheIdOfUrl(url){
+    let parts = url.split("/");
+    
+    return Number(parts[6]);
+}
+
 async function updateDialogContent(pokemon){
     currentPokemon = pokemon;
     updateDialogHeader(pokemon);
@@ -106,6 +112,22 @@ function updateDialogHeader(pokemon){
 
 }
 
+function showTabsInfo(tabName){
+    console.log("showTabsInfo läuft:", tabName);
+    document.getElementById('tab_main').classList.add('d_none');
+    document.getElementById('tab_stats').classList.add('d_none');
+    document.getElementById('tab_evo').classList.add('d_none');
+
+    document.getElementById('tab_' + tabName).classList.remove('d_none');
+}
+
+function renderMainTab(pokemon){
+    let height = pokemon.height / 10;
+    let weight = pokemon.weight / 10;
+    let abilities = getAbilities(pokemon.abilities);
+    document.getElementById("tab_main").innerHTML = renderMainTemplate(height, weight, pokemon.base_experience, abilities);
+}
+
 function getAbilities(abilities){
 
     let abilityNames = "";
@@ -119,13 +141,6 @@ function getAbilities(abilities){
         }
     }
     return abilityNames;
-}
-
-function renderMainTab(pokemon){
-    let height = pokemon.height / 10;
-    let weight = pokemon.weight / 10;
-    let abilities = getAbilities(pokemon.abilities);
-    document.getElementById("tab_main").innerHTML = renderMainTamplate(height, weight, pokemon.base_experience, abilities);
 }
 
 function renderStatsTab(pokemon){
@@ -147,12 +162,6 @@ async function loadEvoChain(pokemon){
     let evolutionsData = await evolutionsChainResponse.json();
 
     return evolutionsData.chain;
-}
-
-function getTheIdOfUrl(url){
-    let parts = url.split("/");
-    
-    return Number(parts[6]);
 }
 
 function createEvolutionData(species){
@@ -183,15 +192,6 @@ function getEvoNamesAndImages(chain){
     document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutions);
     
     
-}
-
-function showTabsInfo(tabName){
-    console.log("showTabsInfo läuft:", tabName);
-    document.getElementById('tab_main').classList.add('d_none');
-    document.getElementById('tab_stats').classList.add('d_none');
-    document.getElementById('tab_evo').classList.add('d_none');
-
-    document.getElementById('tab_' + tabName).classList.remove('d_none');
 }
 
 function stopEventBubbling(event){
