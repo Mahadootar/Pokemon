@@ -118,7 +118,6 @@ function getAbilities(abilities){
             abilityNames += ", ";
         }
     }
-
     return abilityNames;
 }
 
@@ -127,8 +126,6 @@ function renderMainTab(pokemon){
     let weight = pokemon.weight / 10;
     let abilities = getAbilities(pokemon.abilities);
     document.getElementById("tab_main").innerHTML = renderMainTamplate(height, weight, pokemon.base_experience, abilities);
-    console.log(pokemon.abilities);
-    
 }
 
 function renderStatsTab(pokemon){
