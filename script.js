@@ -4,11 +4,13 @@ let pokemonData = [];  /* The array first stores the Pokémon list from the API.
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
 let evolutionDataCache = {} /*This Object is used to store the evolution data that has been loaded. */
 let currentPokemon;
+let filteredNames = [];
 let currentIndex = 0;
 
 /*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
    await fetchData(20,0);
+   filteredNames = pokemonData;
    renderPokemons();
 }
 
@@ -32,8 +34,8 @@ async function renderPokemons(){
     let pokemonContainer = document.getElementById('pokemonContent');
     pokemonContainer.innerHTML = '';
 
-    for (let index = 0; index < pokemonData.length; index++) {
-        let pokemon = pokemonData[index];
+    for (let index = 0; index < filteredNames.length; index++) {
+        let pokemon = filteredNames[index];
         let data = await loadPokemonDetails(pokemon);
         pokemonContainer.innerHTML += createPokemonCard(data, index);
     }  
@@ -224,6 +226,25 @@ function previousPokemon(){
     let selectedPokemon = loadedPokemonData[pokemonId];
     updateDialogContent(selectedPokemon);
 
+}
+
+function filterAndShowPokemon(filterWord){
+    filteredNames = pokemonData.filter(pokemon => pokemon.name.includes(filterWord));
+    renderPokemons();
+
+}
+
+function searchPokemon(){
+    let searchInput = document.querySelector('#search-input');
+    let filterWord = searchInput.value.toLowerCase().trim();
+
+    if (filterWord.length < 3) {
+        filteredNames = pokemonData;
+        renderPokemons();
+        
+    }else{
+        filterAndShowPokemon(filterWord);
+    }
 }
 
 function getColor(type){
