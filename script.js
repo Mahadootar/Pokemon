@@ -91,12 +91,12 @@ function getTheIdOfUrl(url){
     return Number(parts[6]);
 }
 
-async function updateDialogContent(pokemon){
+function updateDialogContent(pokemon){
     currentPokemon = pokemon;
     updateDialogHeader(pokemon);
     renderMainTab(currentPokemon);
     renderStatsTab(currentPokemon);
-    await renderEvoTab(currentPokemon)
+    renderEvoTab(currentPokemon)
     showTabsInfo('main');
 
 }
@@ -200,22 +200,29 @@ function closeDialog(){
     dialogRef.close();
 }
 
-function nextPokemon(pokemon){
+function nextPokemon(){
     if (currentIndex < pokemonData.length -1 ) {
         currentIndex++
     }else{
         currentIndex = 0;
     }
-    updateDialogContent(pokemon);
+    let pokemonFromTheList = pokemonData[currentIndex];
+    let pokemonId = getTheIdOfUrl(pokemonFromTheList.url)
+    let selectedPokemon = loadedPokemonData[pokemonId];
+    
+    updateDialogContent(selectedPokemon);
 }
 
-function previousPokemon(pokemon){
+function previousPokemon(){
     if (currentIndex > 0) {
         currentIndex--;
     }else{
         currentIndex = pokemonData.length -1
     }
-    updateDialogContent(pokemon);
+    let pokemonFromTheList = pokemonData[currentIndex];
+    let pokemonId = getTheIdOfUrl(pokemonFromTheList.url)
+    let selectedPokemon = loadedPokemonData[pokemonId];
+    updateDialogContent(selectedPokemon);
 
 }
 
