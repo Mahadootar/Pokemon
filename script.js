@@ -2,7 +2,6 @@ const dialogRef = document.getElementById("dialog_id");
 const pokemonContainer = document.getElementById("pokemonContent"); 
 let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
-let evolutionDataCache = {} /*This Object is used to store the evolution data that has been loaded. */
 let currentPokemon;
 let filteredNames = [];
 let currentIndex = 0;
@@ -11,6 +10,7 @@ let limit = 20;
 
 /*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
+   getToTheLocalStorage();
    await fetchData(limit,0);
    filteredNames = pokemonData;
    renderPokemons();
@@ -48,6 +48,8 @@ async function loadPokemonDetails(pokemon){
     let response = await fetch(pokemon.url);
         let data = await response.json();
         loadedPokemonData[data.id] = data;
+
+        saveToTheLocalStorage();
 
         return data;
 
@@ -260,6 +262,7 @@ async function loadMorePokedex(){
     currenOffset += limit;
 
 }
+
 
 function getColor(type){
     switch (type) {
