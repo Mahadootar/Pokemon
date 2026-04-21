@@ -6,16 +6,19 @@ let evolutionDataCache = {} /*This Object is used to store the evolution data th
 let currentPokemon;
 let filteredNames = [];
 let currentIndex = 0;
+let currenOffset = 0;
+let limit = 20;
 
 /*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
-   await fetchData(20,0);
+   await fetchData(limit,0);
    filteredNames = pokemonData;
    renderPokemons();
+   currenOffset = 20;
 }
 
 /* This function loads Pokémon data from an API and saves the results.*/
- async function fetchData(limit = 20, offset = 0) {
+ async function fetchData(limit, offset = 0) {
    try {
      const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
 
@@ -236,15 +239,26 @@ function filterAndShowPokemon(filterWord){
 
 function searchPokemon(){
     let searchInput = document.querySelector('#search-input');
+    let searchHint = document.getElementById('search-hint');
     let filterWord = searchInput.value.toLowerCase().trim();
 
     if (filterWord.length < 3) {
+        searchHint.classList.remove("d_none");
         filteredNames = pokemonData;
         renderPokemons();
         
     }else{
+        searchHint.classList.add("d_none");
         filterAndShowPokemon(filterWord);
     }
+}
+
+async function loadMorePokedex(){
+    await fetchData(limit, currenOffset);
+    filteredNames = pokemonData;
+    await renderPokemons();
+    currenOffset += limit;
+
 }
 
 function getColor(type){

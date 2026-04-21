@@ -65,7 +65,7 @@ main {
 
 dialog{
     width: 350px;
-    height: 500px;
+    height: 530px;
     margin: auto;
     padding: 0px;
    background-color: var(--bg_blue_light);
@@ -113,3 +113,4 @@ footer{
     align-items: center;
 
 }
+

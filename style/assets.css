@@ -170,3 +170,13 @@
     width: 0px;
     
 }
+
+#search_form{
+    display: flex;
+    flex-direction: column;
+}
+
+#search-hint{
+    color: red;
+    font-size: small;
+}

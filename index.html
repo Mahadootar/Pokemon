@@ -56,13 +56,18 @@
               placeholder="Enter Pokemon Name"
               name="pokemon"
             />
+            <small id="search-hint" class="d_none"
+              >please enter at least 3 characters></small
+            >
           </form>
         </nav>
       </div>
     </header>
     <main>
       <section id="pokemonContent"></section>
-      <button onclick="" class="btn_load">load Pokemons</button>
+      <button onclick="loadMorePokedex()" class="btn_load">
+        load Pokemons
+      </button>
     </main>
     <footer>
       <div class="footer_div">
