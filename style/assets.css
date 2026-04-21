@@ -180,3 +180,25 @@
     color: red;
     font-size: small;
 }
+
+.loading-roand{
+    display: flex;
+    justify-content: center;
+}
+
+.loading-roand::after{
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 10px solid transparent;
+    border-top-color: #009579 ;
+    border-radius: 50%;
+    animation: loading-roand 1s linear infinite;
+}
+
+@keyframes loading-roand{
+    to {
+        transform: rotate(1turn);
+    }
+
+}

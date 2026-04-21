@@ -2,18 +2,17 @@ const dialogRef = document.getElementById("dialog_id");
 const pokemonContainer = document.getElementById("pokemonContent"); 
 let pokemonData = [];  /* The array first stores the Pokémon list from the API.*/
 let loadedPokemonData = {} /*This Object will later store the complete detailed data of the Pokémon. */
-let currentPokemon;
-let filteredNames = [];
+let filteredNames = []; 
 let currentIndex = 0;
 let currenOffset = 0;
 let limit = 20;
 
 /*fetchData() is executed. await waits until the data is loaded. The Pokémon are then rendered. */
 async function init() {
-   getToTheLocalStorage();
+   showLoadingSpinner();
    await fetchData(limit,0);
    filteredNames = pokemonData;
-   renderPokemons();
+   await renderPokemons();
    currenOffset = 20;
 }
 
@@ -33,6 +32,7 @@ async function init() {
    } 
 }
 
+/* This function renders the Pokémons*/
 async function renderPokemons(){
     let pokemonContainer = document.getElementById('pokemonContent');
     pokemonContainer.innerHTML = '';
@@ -44,17 +44,17 @@ async function renderPokemons(){
     }  
 }
 
+/* This function loads the details of a Pokémon and saves it in the loadedPokemonData object. */
 async function loadPokemonDetails(pokemon){
     let response = await fetch(pokemon.url);
         let data = await response.json();
         loadedPokemonData[data.id] = data;
 
-        saveToTheLocalStorage();
-
         return data;
 
 }
 
+/* This function creates a card for a Pokémon. It uses the pokemonTemplate to create the HTML structure */
 function createPokemonCard(pokemon, index){
     let id = pokemon.id;
     let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
@@ -66,6 +66,7 @@ function createPokemonCard(pokemon, index){
     return pokemonTemplate(pokemon, imgURL, colorClass, icons, index);
 }
 
+/* This function returns the icons for the types of a Pokémon*/
 function getTypeOfIcon(types){
    let icons = "";
 
@@ -76,6 +77,7 @@ function getTypeOfIcon(types){
    return icons;
 }
 
+/* This function is called when a Pokémon card is clicked/opens the dialog*/
 function openDialog(pokemonId){
     let selectedPokemon = loadedPokemonData[pokemonId];
 
@@ -89,15 +91,16 @@ function openDialog(pokemonId){
     }
     updateDialogContent(selectedPokemon);
     dialogRef.showModal();
-
 }
 
+/* This function extracts the ID of a Pokémon from its URL*/
 function getTheIdOfUrl(url){
     let parts = url.split("/");
     
     return Number(parts[6]);
 }
 
+/* This function updates the content of the dialog*/
 function updateDialogContent(pokemon){
     currentPokemon = pokemon;
     updateDialogHeader(pokemon);
@@ -108,8 +111,8 @@ function updateDialogContent(pokemon){
 
 }
 
+/* This function updates the header of the dialog with the Pokémon */
 function updateDialogHeader(pokemon){
-    
     let icons = getTypeOfIcon(pokemon.types);
     let imgURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`;
     document.getElementById("dialog-title").innerHTML = `#${pokemon.id} ${pokemon.name}`;
@@ -119,6 +122,7 @@ function updateDialogHeader(pokemon){
 
 }
 
+/* This function shows the content of the selected tab and hides the content of the other tabs. */
 function showTabsInfo(tabName){
     console.log("showTabsInfo läuft:", tabName);
     document.getElementById('tab_main').classList.add('d_none');
@@ -128,6 +132,7 @@ function showTabsInfo(tabName){
     document.getElementById('tab_' + tabName).classList.remove('d_none');
 }
 
+/* This function renders the content of the main tab of the dialog*/
 function renderMainTab(pokemon){
     let height = pokemon.height / 10;
     let weight = pokemon.weight / 10;
@@ -135,8 +140,8 @@ function renderMainTab(pokemon){
     document.getElementById("tab_main").innerHTML = renderMainTemplate(height, weight, pokemon.base_experience, abilities);
 }
 
+/* This function extracts the names of the abilities of a Pokémon*/
 function getAbilities(abilities){
-
     let abilityNames = "";
 
     for (let i = 0; i < abilities.length; i++) {
@@ -150,6 +155,7 @@ function getAbilities(abilities){
     return abilityNames;
 }
 
+/* This function renders the content of the stats tab of the dialog*/
 function renderStatsTab(pokemon){
     let hp = pokemon.stats[0].base_stat;
     let attack = pokemon.stats[1].base_stat;
@@ -161,6 +167,7 @@ function renderStatsTab(pokemon){
     console.log(pokemon.stats);
 }
 
+/* This function loads the evolution chain of a Pokémon and returns it. */
 async function loadEvoChain(pokemon){
     let speciesResponse = await fetch(pokemon.species.url);
     let speciesPokemonData = await speciesResponse.json();
@@ -171,6 +178,7 @@ async function loadEvoChain(pokemon){
     return evolutionsData.chain;
 }
 
+/* This function creates an object with the name and image of a Pokémon from its species data. */
 function createEvolutionData(species){
     let id = getTheIdOfUrl(species.url)
     let img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
@@ -179,6 +187,7 @@ function createEvolutionData(species){
 
 }
 
+/* This function extracts Pokémon evolution data and returns them in an array. */
 function getEvoNamesAndImages(chain){
     let evolutions = [createEvolutionData(chain.species)]
 
@@ -193,20 +202,24 @@ function getEvoNamesAndImages(chain){
     return evolutions;
 }
 
+/* This function renders the content of the evolution tab of the dialog*/
  async function renderEvoTab(pokemon){
     let chain = await loadEvoChain(pokemon)
     let evolutions = getEvoNamesAndImages(chain);
     document.getElementById("tab_evo").innerHTML = renderEvoChain(evolutions);
 }
 
+/* This function is called when the user clicks on the dialog. It stops the event from bubbling up to the parent elements*/
 function stopEventBubbling(event){
     event.stopPropagation();
 }
 
+/* This function closes the dialog*/
 function closeDialog(){
     dialogRef.close();
 }
 
+/* This function is called when the user clicks on the next button in the dialog*/
 function nextPokemon(){
     if (currentIndex < pokemonData.length -1 ) {
         currentIndex++
@@ -220,6 +233,7 @@ function nextPokemon(){
     updateDialogContent(selectedPokemon);
 }
 
+/* This function is called when the user clicks on the previous button in the dialog*/
 function previousPokemon(){
     if (currentIndex > 0) {
         currentIndex--;
@@ -233,12 +247,14 @@ function previousPokemon(){
 
 }
 
+/* This function filters the Pokémon list based on the search input */
 function filterAndShowPokemon(filterWord){
     filteredNames = pokemonData.filter(pokemon => pokemon.name.includes(filterWord));
     renderPokemons();
 
 }
 
+/* This function is called when the user types in the search input. It checks if the input is at least 3 characters*/
 function searchPokemon(){
     let searchInput = document.querySelector('#search-input');
     let searchHint = document.getElementById('search-hint');
@@ -247,23 +263,33 @@ function searchPokemon(){
     if (filterWord.length < 3) {
         searchHint.classList.remove("d_none");
         filteredNames = pokemonData;
-        renderPokemons();
-        
+        renderPokemons();  
     }else{
         searchHint.classList.add("d_none");
         filterAndShowPokemon(filterWord);
     }
 }
 
+/* This function loads more Pokémon*/
 async function loadMorePokedex(){
+    showLoadingSpinner();
     await fetchData(limit, currenOffset);
     filteredNames = pokemonData;
     await renderPokemons();
     currenOffset += limit;
-
 }
 
+/* This function shows the loading spinner */
+function showLoadingSpinner(){
+    document.getElementById('loading-sphere').classList.remove('loading-roand');
+}
 
+/* This function hides the loading spinner */
+function hideLoadingSpinner(){
+    document.getElementById('loading-sphere').classList.add('loading-roand');
+}
+
+/*/ This function returns the color class for a Pokémon type*/
 function getColor(type){
     switch (type) {
         case "grass":
