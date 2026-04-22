@@ -1,5 +1,5 @@
 function pokemonTemplate(pokemon, imgURL, colorClass, icons, index){
-    return `<div class="pokemon_card" onclick="openDialog(${pokemon.id})">
+    return `<div class="pokemon_card" tabindex="0" onclick="openDialog(${pokemon.id})">
     <div>
     <h3>#${pokemon.id} ${pokemon.name}</h3>
     </div>
