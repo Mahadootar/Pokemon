@@ -274,13 +274,16 @@ function searchPokemon(){
 /* This function loads more Pokémon*/
 async function loadMorePokedex(){
     showLoadingSpinner();
+    document.getElementById('loadingBtnId').disable = true;
     pokemonContainer.classList.add('loading_none');
     await fetchData(limit, currenOffset);
     filteredNames = pokemonData;
     await renderPokemons();
     currenOffset += limit;
+    hideLoadingSpinner();
+    document.getElementById('loadingBtnId').disable = false;
     pokemonContainer.classList.remove('loading_none');
-    
+   
 }
 
 /* This function shows the loading spinner */
