@@ -82,7 +82,7 @@ function renderEvoChain(evolutions){
     for (let i = 0; i < evolutions.length; i++) {
         html += `<div>
         <img class="evo_img" src="${evolutions[i].img}" alt="${evolutions[i].name}">
-        <p><strong>${evolutions[i].name}</strong></p>
+        <p class="evo_name"><strong>${evolutions[i].name}</strong></p>
         </div>
         `; 
     }

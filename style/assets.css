@@ -165,10 +165,12 @@
 .next_pokemon{
     font-size: medium;
     cursor: pointer;
-    padding: 16px;
     background-color: rgb(255 59 59);
     border-radius: 50%;
-    width: 0px;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
     
 }
 
@@ -206,4 +208,8 @@
 
 .font-button{
     font-size: 16px;
+}
+
+.evo_name{
+    color: white;
 }
