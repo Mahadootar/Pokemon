@@ -6,7 +6,6 @@
     display: flex;
     justify-content: space-between;
     padding: 32px 24px;
-    max-width: 1440px;
 }
 
 .grass{
@@ -203,4 +202,8 @@
         transform: rotate(1turn);
     }
 
+}
+
+.font-button{
+    font-size: 16px;
 }
