@@ -196,7 +196,7 @@
     border: 10px solid transparent;
     border-top-color: #009579 ;
     border-radius: 50%;
-    animation: loading-roand 1s linear infinite;
+    animation: loading-roand 9s linear infinite;
 }
 
 @keyframes loading-roand{
@@ -204,6 +204,10 @@
         transform: rotate(1turn);
     }
 
+}
+
+.loading_none{
+    display: none;
 }
 
 .font-button{

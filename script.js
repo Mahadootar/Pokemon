@@ -35,13 +35,15 @@ async function init() {
 /* This function renders the Pokémons*/
 async function renderPokemons(){
     let pokemonContainer = document.getElementById('pokemonContent');
-    pokemonContainer.innerHTML = '';
+    let pokemonsConHml = "";
 
     for (let index = 0; index < filteredNames.length; index++) {
         let pokemon = filteredNames[index];
         let data = await loadPokemonDetails(pokemon);
-        pokemonContainer.innerHTML += createPokemonCard(data, index);
+        pokemonsConHml += createPokemonCard(data, index);
     }  
+    pokemonContainer.innerHTML = pokemonsConHml;
+    hideLoadingSpinner();
 }
 
 /* This function loads the details of a Pokémon and saves it in the loadedPokemonData object. */
@@ -124,7 +126,6 @@ function updateDialogHeader(pokemon){
 
 /* This function shows the content of the selected tab and hides the content of the other tabs. */
 function showTabsInfo(tabName){
-    console.log("showTabsInfo läuft:", tabName);
     document.getElementById('tab_main').classList.add('d_none');
     document.getElementById('tab_stats').classList.add('d_none');
     document.getElementById('tab_evo').classList.add('d_none');
@@ -262,7 +263,7 @@ function searchPokemon(){
 
     if (filterWord.length < 3) {
         searchHint.classList.remove("d_none");
-        filteredNames = pokemonData;
+        filteredNames === pokemonData;
         renderPokemons();  
     }else{
         searchHint.classList.add("d_none");
@@ -273,20 +274,23 @@ function searchPokemon(){
 /* This function loads more Pokémon*/
 async function loadMorePokedex(){
     showLoadingSpinner();
+    pokemonContainer.classList.add('loading_none');
     await fetchData(limit, currenOffset);
     filteredNames = pokemonData;
     await renderPokemons();
     currenOffset += limit;
+    pokemonContainer.classList.remove('loading_none');
+    
 }
 
 /* This function shows the loading spinner */
 function showLoadingSpinner(){
-    document.getElementById('loading-sphere').classList.remove('loading-roand');
+    document.getElementById('loading-sphere').classList.remove('loading_none');
 }
 
 /* This function hides the loading spinner */
 function hideLoadingSpinner(){
-    document.getElementById('loading-sphere').classList.add('loading-roand');
+    document.getElementById('loading-sphere').classList.add('loading_none');
 }
 
 /*/ This function returns the color class for a Pokémon type*/
