@@ -14,6 +14,8 @@ async function init() {
    filteredNames = pokemonData;
    await renderPokemons();
    currenOffset = 20;
+   hideLoadingSpinner();
+   document.getElementById('loadingBtnId').disabled = false;
 }
 
 /* This function loads Pokémon data from an API and saves the results.*/
@@ -43,7 +45,6 @@ async function renderPokemons(){
         pokemonsConHml += createPokemonCard(data, index);
     }  
     pokemonContainer.innerHTML = pokemonsConHml;
-    hideLoadingSpinner();
 }
 
 /* This function loads the details of a Pokémon and saves it in the loadedPokemonData object. */
@@ -83,8 +84,8 @@ function getTypeOfIcon(types){
 function openDialog(pokemonId){
     let selectedPokemon = loadedPokemonData[pokemonId];
 
-    for (let i = 0; i < pokemonData.length; i++) {
-        let idOfPokemonInList = getTheIdOfUrl(pokemonData[i].url);
+    for (let i = 0; i < filteredNames.length; i++) {
+        let idOfPokemonInList = getTheIdOfUrl(filteredNames[i].url);
         
         if (idOfPokemonInList === pokemonId) {
             currentIndex = i;
@@ -222,12 +223,12 @@ function closeDialog(){
 
 /* This function is called when the user clicks on the next button in the dialog*/
 function nextPokemon(){
-    if (currentIndex < pokemonData.length -1 ) {
+    if (currentIndex < filteredNames.length -1 ) {
         currentIndex++
     }else{
         currentIndex = 0;
     }
-    let pokemonFromTheList = pokemonData[currentIndex];
+    let pokemonFromTheList = filteredNames[currentIndex];
     let pokemonId = getTheIdOfUrl(pokemonFromTheList.url)
     let selectedPokemon = loadedPokemonData[pokemonId];
     
@@ -239,9 +240,9 @@ function previousPokemon(){
     if (currentIndex > 0) {
         currentIndex--;
     }else{
-        currentIndex = pokemonData.length -1
+        currentIndex = filteredNames.length -1
     }
-    let pokemonFromTheList = pokemonData[currentIndex];
+    let pokemonFromTheList = filteredNames[currentIndex];
     let pokemonId = getTheIdOfUrl(pokemonFromTheList.url)
     let selectedPokemon = loadedPokemonData[pokemonId];
     updateDialogContent(selectedPokemon);
@@ -250,7 +251,9 @@ function previousPokemon(){
 
 /* This function filters the Pokémon list based on the search input */
 function filterAndShowPokemon(filterWord){
-    filteredNames = pokemonData.filter(pokemon => pokemon.name.includes(filterWord));
+    const loadMoreBtn = document.getElementById('loadingBtnId');
+    filteredNames = pokemonData.filter(pokemon => pokemon.name.startsWith(filterWord));
+    loadMoreBtn.style.display = 'none';
     renderPokemons();
 
 }
@@ -263,7 +266,7 @@ function searchPokemon(){
 
     if (filterWord.length < 3) {
         searchHint.classList.remove("d_none");
-        filteredNames === pokemonData;
+        filteredNames = pokemonData;
         renderPokemons();  
     }else{
         searchHint.classList.add("d_none");
@@ -273,17 +276,15 @@ function searchPokemon(){
 
 /* This function loads more Pokémon*/
 async function loadMorePokedex(){
+    const loadMoreBtn = document.getElementById('loadingBtnId');
     showLoadingSpinner();
-    document.getElementById('loadingBtnId').disable = true;
-    pokemonContainer.classList.add('loading_none');
+    loadMoreBtn.disabled = true;
     await fetchData(limit, currenOffset);
     filteredNames = pokemonData;
     await renderPokemons();
     currenOffset += limit;
     hideLoadingSpinner();
-    document.getElementById('loadingBtnId').disable = false;
-    pokemonContainer.classList.remove('loading_none');
-   
+    loadMoreBtn.disabled = false;
 }
 
 /* This function shows the loading spinner */

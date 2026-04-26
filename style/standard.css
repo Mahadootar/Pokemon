@@ -22,7 +22,6 @@ body{
     min-height: 100vh;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden;
     background-color: var(--bg_darkblue_dark);
     color: white;
     display: flex;
