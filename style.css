@@ -35,6 +35,10 @@
 }
 
 .pokemon_img_header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
     color: white;
 }
 

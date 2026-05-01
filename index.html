@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="./style/assets.css" />
     <link rel="stylesheet" href="./style/standard.css" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/img/pokedex.png"
+      type="image/x-icon"
+    />
   </head>
   <body onload="init()">
     <header class="aot_header">
@@ -99,6 +104,7 @@
         <div class="dialog-Header_container">
           <header class="pokemon_img_header">
             <h4 class="pokemon-title" id="dialog-title"></h4>
+            <button id="close_dialog_id" onclick="closeDialog()">X</button>
           </header>
         </div>
         <section id="dialogDescription">

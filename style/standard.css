@@ -120,3 +120,13 @@ footer{
 button{
     cursor: pointer;
 }
+
+#close_dialog_id{
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--bg_darkblue_light);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 1% !important;
+}
