@@ -33,7 +33,7 @@ https://pokeapi.co/
 
 ### Home Page
 
-*Add screenshot here*
+*./screenshots/screenshot.png*
 
 ### Pokémon Details
 
