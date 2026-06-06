@@ -33,11 +33,7 @@ https://pokeapi.co/
 
 ### Home Page
 
-*./screenshots/screenshot.png*
-
-### Pokémon Details
-
-*./screenshots/screenshot.png*
+![Pokédex Startseite](./assets/screenshot/screenshot.png)
 
 ## Installation
 
