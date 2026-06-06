@@ -79,6 +79,9 @@ dialog nav, dialog button{
     display: flex;
     justify-content: center;
     width: 100%;
+    padding-block: 0px;
+    padding-inline: 0px;
+    border-width: 1px;
 }
 
 .footer_div {
